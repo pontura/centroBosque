@@ -24,7 +24,7 @@ namespace PlatformsGame
         {
             if (stopped || data == null) return;
 
-            Vector3 pos = transform.position;
+            Vector3 pos = transform.localPosition;
             pos.x += direction * data.speed * Time.deltaTime;
 
             if (pos.x <= data.minX)
@@ -38,7 +38,7 @@ namespace PlatformsGame
                 direction = -1;
             }
 
-            transform.position = pos;
+            transform.localPosition = pos;
         }
 
         public Bounds GetBounds()
