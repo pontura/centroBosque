@@ -4,6 +4,7 @@ namespace PlatformsGame
 {
     public class Character : MonoBehaviour
     {
+        [SerializeField] Animator anim;
         public KeyCode keyCode;
         public float jumpSpeed = 8f;
         public float gravity = 20f;
@@ -38,7 +39,8 @@ namespace PlatformsGame
                 {
                     currentPlatform.Resume();
                     currentPlatform = null;
-                }
+                }                
+                Anim("up");
             }
 
             if (grounded) return;
@@ -50,6 +52,8 @@ namespace PlatformsGame
 
             if (velocityY < 0)
             {
+                // Las platforms se mueven por transform: actualizar los colliders antes de leer sus bounds
+                Physics2D.SyncTransforms();
                 Platform platform = CheckLanding(pos.x, prevBottom, pos.y - bottomOffset);
                 if (platform != null)
                 {
@@ -88,6 +92,17 @@ namespace PlatformsGame
         {
             velocityY = 0;
             grounded = true;
+            Anim("land");
+        }
+
+        string lastName;
+        void Anim(string name)
+        {
+            if(anim == null) return;
+            if(lastName == name) return;
+            print("character anim " + name);
+            lastName = name;
+            anim.Play(name);
         }
     }
 }

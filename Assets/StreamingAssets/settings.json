@@ -1,8 +1,8 @@
 {
 	"gameOver_duration"	: "12",
 	"platform_speed": 1.5,
-	"platform_minX": -2,
-	"platform_maxX": 2,
+	"platform_minX": -3,
+	"platform_maxX": 3,
 	"platform_offset": 0.3,
 	"platform_narrower": 0.3
 }

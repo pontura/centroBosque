@@ -4,12 +4,16 @@ namespace TreesGame
 {
     public class Character : MonoBehaviour
     {
+        [SerializeField] Animator anim;
         public KeyCode keyCode = KeyCode.Space;
-        public int startTreeID = 0;
+        public int startTreeID = 0;     // tree donde arranca
+        public int otherTreeID = 1;     // el otro tree entre los que salta
+        public Goal goal;               // si es null usa el goal de Trees
         public float jumpHeight = 2f;   // cuanto sube en cada salto
         public float arcHeight = 1f;    // altura extra de la parabola sobre el punto de llegada
         public float jumpDuration = 0.5f;
-        public float slideSpeed = 0.5f; // velocidad a la que resbala por el tree
+        [UnityEngine.Serialization.FormerlySerializedAs("slideSpeed")]
+        public float climbSpeed = 0.5f; // velocidad a la que sube lentamente por el tree
         public float gravity = 20f;     // al caerse por un obstacle
         public float restartDelay = 0.5f; // espera en el piso antes de empezar de nuevo
 
@@ -30,7 +34,9 @@ namespace TreesGame
         public void Init(Trees t)
         {
             trees = t;
-            col = GetComponentInChildren<Collider2D>();
+            if (goal == null)
+                goal = trees.goal;
+            col =GetComponentInChildren<Collider2D>();
             if (col == null)
                 Debug.LogWarning("Character sin Collider2D: no va a detectar obstacles");
             Renderer rend = GetComponentInChildren<Renderer>();
@@ -63,7 +69,7 @@ namespace TreesGame
                     if (Input.GetKeyDown(keyCode))
                         Jump();
                     else
-                        Slide();
+                        Climb();
                     break;
                 case states.jumping:
                     UpdateJump();
@@ -79,7 +85,7 @@ namespace TreesGame
             // Movemos el transform a mano: actualizar los colliders antes de comparar
             Physics2D.SyncTransforms();
 
-            if (trees.goal != null && trees.goal.Overlaps(col))
+            if (goal != null && goal.Overlaps(col))
                 Win();
             else if (HitsObstacle())
                 Fall();
@@ -88,9 +94,11 @@ namespace TreesGame
         // Llega al goal: queda quieto en la posicion del goal y despues empieza de nuevo
         void Win()
         {
-            transform.position = trees.goal.GetCharacterPosition();
+            transform.position = goal.GetCharacterPosition();
             state = states.won;
-            Invoke("Restart", trees.goal.freezeTime);
+            Invoke("Restart", goal.freezeTime);
+            
+            Anim("win");
         }
 
         void UpdateJump()
@@ -102,15 +110,26 @@ namespace TreesGame
             transform.position = pos;
 
             if (t >= 1)
+            {
                 state = states.onTree;
+            }
+        }
+        string lastName;
+        void Anim(string name)
+        {
+            if(anim == null) return;
+            if(lastName == name) return;
+            print("character anim " + name);
+            lastName = name;
+            anim.Play(name);
         }
 
-        // Pegado al tree resbala hacia abajo hasta tocar el piso
-        void Slide()
+        // Pegado al tree sube lentamente
+        void Climb()
         {
+            Anim("up");
             Vector3 pos = transform.position;
-            if (pos.y <= floorY) return;
-            pos.y = Mathf.Max(floorY, pos.y - slideSpeed * Time.deltaTime);
+            pos.y += climbSpeed * Time.deltaTime;
             transform.position = pos;
         }
 
@@ -124,10 +143,12 @@ namespace TreesGame
             treeID = targetID;
             jumpTime = 0;
             state = states.jumping;
+            Anim("mid");
         }
 
         void Fall()
         {
+            Anim("down");
             velocityY = 0;
             state = states.falling;
         }
@@ -142,22 +163,23 @@ namespace TreesGame
             {
                 pos.y = floorY;
                 state = states.dead;
+                
+                Anim("land");
                 Invoke("Restart", restartDelay);
             }
             transform.position = pos;
         }
 
+        // Solo los obstacles de sus dos trees
         bool HitsObstacle()
         {
-            foreach (Tree tree in trees.trees)
-                if (tree.HitsObstacle(col))
-                    return true;
-            return false;
+            return trees.trees[startTreeID].HitsObstacle(col)
+                || trees.trees[otherTreeID].HitsObstacle(col);
         }
 
         int GetOtherTreeID()
         {
-            return treeID == 0 ? 1 : 0;
+            return treeID == startTreeID ? otherTreeID : startTreeID;
         }
 
         // X donde queda el character pegado al tree, del lado que mira hacia lookAtTreeID

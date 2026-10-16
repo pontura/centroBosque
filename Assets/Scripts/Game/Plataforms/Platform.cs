@@ -10,11 +10,13 @@ namespace PlatformsGame
         public bool stopped;
 
         Renderer rend;
+        Collider2D col; // si tiene, define la zona de aterrizaje (editable a mano)
         float direction = -1;
 
         void Awake()
         {
             rend = GetComponentInChildren<Renderer>();
+            col = GetComponentInChildren<Collider2D>();
         }
         public void Init(PlatformData pd)
         {
@@ -43,6 +45,8 @@ namespace PlatformsGame
 
         public Bounds GetBounds()
         {
+            if (col != null && col.enabled)
+                return col.bounds;
             return rend.bounds;
         }
 
