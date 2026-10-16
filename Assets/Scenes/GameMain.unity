@@ -335,7 +335,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 367, y: -470.6136}
+  m_AnchoredPosition: {x: 415.45, y: -470.6136}
   m_SizeDelta: {x: 873.17944, y: 38.802307}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &93323540
@@ -358,7 +358,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: este se juega con space
+  m_text: este se juega con N y M
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1180,7 +1180,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1286097090427370434, guid: 6a93d9898f5266645bc2dbc59cbd2d43, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 10.11
+      value: 8.36
       objectReference: {fileID: 0}
     - target: {fileID: 1286097090427370434, guid: 6a93d9898f5266645bc2dbc59cbd2d43, type: 3}
       propertyPath: m_LocalPosition.y
@@ -2811,9 +2811,9 @@ SceneRoots:
   - {fileID: 330585546}
   - {fileID: 410087041}
   - {fileID: 832575519}
-  - {fileID: 943061482}
   - {fileID: 1045549039}
   - {fileID: 1958613485}
   - {fileID: 553001718}
   - {fileID: 1338466808}
   - {fileID: 801941057}
+  - {fileID: 943061482}
