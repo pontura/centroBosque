@@ -12,7 +12,6 @@ namespace TreesGame
         public states state;
         public int levelID;
         public List<Tree> trees;
-        public Goal goal;
         public enum states
         {
             splash,

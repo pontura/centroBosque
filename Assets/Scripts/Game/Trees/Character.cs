@@ -8,7 +8,7 @@ namespace TreesGame
         public KeyCode keyCode = KeyCode.Space;
         public int startTreeID = 0;     // tree donde arranca
         public int otherTreeID = 1;     // el otro tree entre los que salta
-        public Goal goal;               // si es null usa el goal de Trees
+        public Goal goal;               // goal propio de este character
         public float jumpHeight = 2f;   // cuanto sube en cada salto
         public float arcHeight = 1f;    // altura extra de la parabola sobre el punto de llegada
         public float jumpDuration = 0.5f;
@@ -35,7 +35,7 @@ namespace TreesGame
         {
             trees = t;
             if (goal == null)
-                goal = trees.goal;
+                Debug.LogWarning("Character sin Goal asignado: " + name);
             col =GetComponentInChildren<Collider2D>();
             if (col == null)
                 Debug.LogWarning("Character sin Collider2D: no va a detectar obstacles");

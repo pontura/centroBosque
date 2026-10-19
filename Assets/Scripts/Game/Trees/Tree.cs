@@ -34,7 +34,10 @@ namespace TreesGame
         {
             foreach (Obstacle o in obstacles)
                 if (o.Overlaps(c))
+                {
+                    o.Hit();
                     return true;
+                }
             return false;
         }
     }
