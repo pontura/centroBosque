@@ -17,7 +17,7 @@ namespace TreesGame
         public float gravity = 20f;     // al caerse por un obstacle
         public float restartDelay = 0.5f; // espera en el piso antes de empezar de nuevo
 
-        enum states { onTree, jumping, falling, dead, won }
+        enum states { waiting, onTree, jumping, falling, dead, won }
         states state;
 
         Trees trees;
@@ -56,7 +56,9 @@ namespace TreesGame
             treeID = startTreeID;
             transform.position = startPos;
             velocityY = 0;
-            state = states.onTree;
+            // Queda quieto en la base hasta que se apriete el boton
+            state = states.waiting;
+            Anim("idle");
         }
 
         void Update()
@@ -65,6 +67,10 @@ namespace TreesGame
 
             switch (state)
             {
+                case states.waiting:
+                    if (Input.GetKeyDown(keyCode))
+                        state = states.onTree;
+                    return;
                 case states.onTree:
                     if (Input.GetKeyDown(keyCode))
                         Jump();

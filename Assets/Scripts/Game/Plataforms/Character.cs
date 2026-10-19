@@ -8,7 +8,10 @@ namespace PlatformsGame
         public KeyCode keyCode;
         public float jumpSpeed = 8f;
         public float gravity = 20f;
+        public float winDelay = 6f;     // espera en la ultima platform antes de volver al inicio
 
+        Vector3 startPos;
+        bool won;
         float floorY;
         float groundY;
         float velocityY;
@@ -23,6 +26,7 @@ namespace PlatformsGame
         {
             this.platforms = platforms;
             rend = GetComponentInChildren<Renderer>();
+            startPos = transform.position;
             floorY = transform.position.y;
             groundY = floorY;
             bottomOffset = transform.position.y - rend.bounds.min.y;
@@ -31,6 +35,8 @@ namespace PlatformsGame
 
         void Update()
         {
+            if (platforms == null || won) return;
+
             if (grounded && Input.GetKeyDown(keyCode))
             {
                 velocityY = jumpSpeed;
@@ -62,6 +68,8 @@ namespace PlatformsGame
                     groundY = platform.GetBounds().max.y + bottomOffset;
                     pos.y = groundY;
                     Land();
+                    if (platform == platforms.platforms[platforms.platforms.Count - 1])
+                        Win();
                 }
                 else if (pos.y <= floorY)
                 {
@@ -92,6 +100,29 @@ namespace PlatformsGame
         {
             velocityY = 0;
             grounded = true;
+            Anim("land");
+        }
+
+        // Llega a la ultima platform: festeja, espera y vuelve al inicio
+        void Win()
+        {
+            won = true;
+            Anim("win");
+            Invoke("Restart", winDelay);
+        }
+
+        void Restart()
+        {
+            if (currentPlatform != null)
+            {
+                currentPlatform.Resume();
+                currentPlatform = null;
+            }
+            transform.position = startPos;
+            groundY = floorY;
+            velocityY = 0;
+            grounded = true;
+            won = false;
             Anim("land");
         }
 
