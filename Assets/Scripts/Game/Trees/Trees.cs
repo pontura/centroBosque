@@ -12,6 +12,7 @@ namespace TreesGame
         public states state;
         public int levelID;
         public List<Tree> trees;
+        ObstaclesManager obstaclesManager;
         public enum states
         {
             splash,
@@ -21,7 +22,7 @@ namespace TreesGame
 
         void Start()
         {
-           
+           obstaclesManager = GetComponent<ObstaclesManager>();
             StartCoroutine(LoadSettings());
 
         }
@@ -53,6 +54,13 @@ namespace TreesGame
                 Debug.Log("Settings loaded: " + json);
                 Invoke("StartDelayed", 0.5f);
             }
+            SetLevel(obstaclesManager.GetLevel());
+        }
+        public void SetLevel(Level level)
+        {
+            trees[0].SetObstacles(level.obstaclesTree1);
+            trees[1].SetObstacles(level.obstaclesTree2);
+            trees[2].SetObstacles(level.obstaclesTree3);
         }
         void StartDelayed()
         {

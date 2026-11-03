@@ -7,20 +7,11 @@ namespace TreesGame
         [HideInInspector] public Obstacle[] obstacles;
         Renderer rend;
 
-        void Awake()
+        public void SetObstacles(Obstacle[] obstacles)
         {
-            obstacles = GetComponentsInChildren<Obstacle>();
-
-            // El renderer del tronco: el primero que no pertenezca a un Obstacle
-            foreach (Renderer r in GetComponentsInChildren<Renderer>())
-            {
-                if (r.GetComponentInParent<Obstacle>() == null)
-                {
-                    rend = r;
-                    break;
-                }
-            }
+            this.obstacles = obstacles;
         }
+        
 
         // X del borde del tronco del lado indicado (-1 izquierda, 1 derecha)
         public float GetSideX(int side)
