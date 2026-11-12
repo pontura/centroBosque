@@ -6196,14 +6196,14 @@ MonoBehaviour:
     - {fileID: 782464299}
     - {fileID: 1114437761}
     - {fileID: 1184462001}
-    bendPerBone: 8
+    bendPerBone: 12
     tipMultiplier: 1.5
     bendSpeed: 3
     releaseSpeed: 1.5
     swayAmount: 2
     swaySpeed: 2
-    idleAmount: 1.5
-    idleSpeed: 0.25
+    idleAmount: 3
+    idleSpeed: 0.6
   - name: BigPlants
     spriteSkins:
     - {fileID: 1251046238}
