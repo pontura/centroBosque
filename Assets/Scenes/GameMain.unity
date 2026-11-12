@@ -6127,6 +6127,8 @@ GameObject:
   m_Component:
   - component: {fileID: 599604142}
   - component: {fileID: 599604143}
+  - component: {fileID: 599604145}
+  - component: {fileID: 599604144}
   m_Layer: 0
   m_Name: GameContent
   m_TagString: Untagged
@@ -6240,6 +6242,47 @@ MonoBehaviour:
   swaySpeed: 2
   idleAmount: 1.5
   idleSpeed: 0.25
+--- !u!114 &599604144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599604140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 506ae6999f727e949921ee68928ba932, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DayCycle
+  animator: {fileID: 599604145}
+  stateName: 
+  layer: 0
+  cyclesPerSecond: 0.5
+  loop: 1
+  useMouse: 1
+  mouseSensitivity: 500
+--- !u!95 &599604145
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599604140}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e40a6e7a666939b479728e03547fff02, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &604014030 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7393601667011745205, guid: 227cad7ef125c474bacd7e57f40b4b9d, type: 3}
