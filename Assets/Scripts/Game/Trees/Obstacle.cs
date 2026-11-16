@@ -21,6 +21,17 @@ namespace TreesGame
             anim.Play("hit");
         }
 
+        // Cambio de level: sale ("exit") y despues vuelve a entrar ("entry")
+        public void Exit() => PlayFromStart("exit");
+        public void Entry() => PlayFromStart("entry");
+
+        void PlayFromStart(string clip)
+        {
+            if (anim == null) return;
+            anim.Stop();
+            anim.Play(clip);
+        }
+
         // Compara la forma real de los colliders (box, circle, polygon, etc)
         public bool Overlaps(Collider2D other)
         {

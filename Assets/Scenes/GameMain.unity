@@ -682,7 +682,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 170385030}
   serializedVersion: 8
-  lengthInSec: 5
+  lengthInSec: 3
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -6184,7 +6184,7 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 539808819}
   serializedVersion: 8
-  lengthInSec: 5
+  lengthInSec: 3
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
@@ -11397,7 +11397,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1286097090427370434, guid: 6a93d9898f5266645bc2dbc59cbd2d43, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -8.806298
+      value: -8.06
       objectReference: {fileID: 0}
     - target: {fileID: 1286097090427370434, guid: 6a93d9898f5266645bc2dbc59cbd2d43, type: 3}
       propertyPath: m_LocalPosition.z
@@ -11487,6 +11487,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.21
       objectReference: {fileID: 0}
+    - target: {fileID: 4256184626887316047, guid: 6a93d9898f5266645bc2dbc59cbd2d43, type: 3}
+      propertyPath: level
+      value: 
+      objectReference: {fileID: 1370525290}
     - target: {fileID: 4465587468794982048, guid: 6a93d9898f5266645bc2dbc59cbd2d43, type: 3}
       propertyPath: m_Radius
       value: 0.35
@@ -12894,6 +12898,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57c008f954fe54a8bb972de1018a2cb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.2D.Animation.Runtime::UnityEngine.U2D.Animation.SpriteSkin
+--- !u!114 &1370525290 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1815302779626083447, guid: 6a93d9898f5266645bc2dbc59cbd2d43, type: 3}
+  m_PrefabInstance: {fileID: 801941057}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e0a6af12df269946b870b05a28e1da9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TreesGame.Level
 --- !u!1 &1392025537
 GameObject:
   m_ObjectHideFlags: 0

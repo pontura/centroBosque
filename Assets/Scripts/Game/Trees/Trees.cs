@@ -54,7 +54,6 @@ namespace TreesGame
                 Debug.Log("Settings loaded: " + json);
                 Invoke("StartDelayed", 0.5f);
             }
-            SetLevel(obstaclesManager.GetLevel());
         }
         public void SetLevel(Level level)
         {

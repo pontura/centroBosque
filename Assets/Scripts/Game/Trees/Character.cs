@@ -16,6 +16,8 @@ namespace TreesGame
         public float climbSpeed = 0.5f; // velocidad a la que sube lentamente por el tree
         public float gravity = 20f;     // al caerse por un obstacle
         public float restartDelay = 0.5f; // espera en el piso antes de empezar de nuevo
+        public float winDuration = 4f;    // tiempo de la animacion "win" antes de "exit"
+        public float exitDuration = 1f;   // tiempo de "exit" antes de reaparecer con "entry"
 
         enum states { waiting, onTree, jumping, falling, dead, won }
         states state;
@@ -98,14 +100,25 @@ namespace TreesGame
                 Fall();
         }
 
-        // Llega al goal: queda quieto en la posicion del goal y despues empieza de nuevo
+        // Llega al goal: festeja (win), sale (exit) y vuelve a entrar (entry) en la posicion inicial
         void Win()
         {
             transform.position = goal.GetCharacterPosition();
             state = states.won;
-            Invoke("Restart", goal.freezeTime);
-            
             Anim("win");
+            Invoke("Exit", winDuration);
+        }
+
+        void Exit()
+        {
+            Anim("exit");
+            Invoke("Entry", exitDuration);
+        }
+
+        void Entry()
+        {
+            Restart();
+            Anim("entry");
         }
 
         void UpdateJump()
