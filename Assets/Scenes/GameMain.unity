@@ -11104,8 +11104,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d0c5dc770879c445956a592675805ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WindFX
-  windLeft: {fileID: 1330269956}
-  windRight: {fileID: 653377802}
+  windLeft: {fileID: 1330269958}
+  windRight: {fileID: 653377804}
   leftKey: 113
   rightKey: 119
   layers:

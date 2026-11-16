@@ -52,8 +52,8 @@ public class WindFX : MonoBehaviour
         public float limit = 10f;
     }
 
-    [SerializeField] GameObject windLeft;
-    [SerializeField] GameObject windRight;
+    [SerializeField] Animator windLeft;
+    [SerializeField] Animator windRight;
     [SerializeField] KeyCode leftKey = KeyCode.Q;
     [SerializeField] KeyCode rightKey = KeyCode.W;
     [SerializeField] PlantLayer[] layers;
@@ -77,6 +77,8 @@ public class WindFX : MonoBehaviour
 
     Direction currentDirection = Direction.None;
     float targetBend;   // -1 izquierda, 1 derecha, 0 idle
+    int windLeftState;  // hash del único estado de cada animator
+    int windRightState;
 
     void OnValidate() => MigrateLegacy();
 
@@ -192,8 +194,25 @@ public class WindFX : MonoBehaviour
     public void Wind(Direction direction)
     {
         currentDirection = direction;
-        if (windLeft != null) windLeft.SetActive(direction == Direction.Left);
-        if (windRight != null) windRight.SetActive(direction == Direction.Right);
+        SetWindAnimator(windLeft, ref windLeftState, direction == Direction.Left);
+        SetWindAnimator(windRight, ref windRightState, direction == Direction.Right);
         targetBend = direction == Direction.Left ? -1f : direction == Direction.Right ? 1f : 0f;
+    }
+
+    // Play = arranca su única animación desde el frame 0.
+    // Stop = queda congelado en el frame 0.
+    static void SetWindAnimator(Animator animator, ref int stateHash, bool play)
+    {
+        if (animator == null) return;
+
+        if (stateHash == 0)
+        {
+            animator.Update(0f);
+            stateHash = animator.GetCurrentAnimatorStateInfo(0).fullPathHash;
+        }
+
+        animator.speed = play ? 1f : 0f;
+        animator.Play(stateHash, 0, 0f);
+        animator.Update(0f); // aplica el frame 0 en el acto
     }
 }
