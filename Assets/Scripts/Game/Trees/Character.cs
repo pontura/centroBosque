@@ -56,6 +56,7 @@ namespace TreesGame
             treeID = startTreeID;
             transform.position = startPos;
             velocityY = 0;
+            UpdateFacing();
             // Queda quieto en la base hasta que se apriete el boton
             state = states.waiting;
             Anim("idle");
@@ -123,7 +124,7 @@ namespace TreesGame
         string lastName;
         void Anim(string name)
         {
-            if(anim == null) return;
+            if(anim == null) anim = GetComponent<Animator>();
             if(lastName == name) return;
             print("character anim " + name);
             lastName = name;
@@ -133,7 +134,7 @@ namespace TreesGame
         // Pegado al tree sube lentamente
         void Climb()
         {
-            Anim("up");
+            Anim("climb");
             Vector3 pos = transform.position;
             pos.y += climbSpeed * Time.deltaTime;
             transform.position = pos;
@@ -147,14 +148,15 @@ namespace TreesGame
             to.x = GetSideX(targetID, treeID);
             to.y += jumpHeight;
             treeID = targetID;
+            UpdateFacing();
             jumpTime = 0;
             state = states.jumping;
-            Anim("mid");
+            Anim("jump");
         }
 
         void Fall()
         {
-            Anim("down");
+            Anim("fall");
             velocityY = 0;
             state = states.falling;
         }
@@ -181,6 +183,15 @@ namespace TreesGame
         {
             return trees.trees[startTreeID].HitsObstacle(col)
                 || trees.trees[otherTreeID].HitsObstacle(col);
+        }
+
+        // scale.x = -1 si esta en el tree de la derecha, 1 si esta en el de la izquierda
+        void UpdateFacing()
+        {
+            bool onRight = trees.trees[treeID].transform.position.x > trees.trees[GetOtherTreeID()].transform.position.x;
+            Vector3 s = transform.localScale;
+            s.x = Mathf.Abs(s.x) * (onRight ? -1 : 1);
+            transform.localScale = s;
         }
 
         int GetOtherTreeID()

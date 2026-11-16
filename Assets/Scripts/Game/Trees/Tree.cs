@@ -5,7 +5,7 @@ namespace TreesGame
     public class Tree : MonoBehaviour
     {
         [HideInInspector] public Obstacle[] obstacles;
-        Renderer rend;
+        public float offsetX = 0.5f; // distancia del centro al borde del tronco (medio grosor)
 
         public void SetObstacles(Obstacle[] obstacles)
         {
@@ -16,9 +16,15 @@ namespace TreesGame
         // X del borde del tronco del lado indicado (-1 izquierda, 1 derecha)
         public float GetSideX(int side)
         {
-            if (rend == null)
-                return transform.position.x;
-            return side < 0 ? rend.bounds.min.x : rend.bounds.max.x;
+            return transform.position.x + side * offsetX;
+        }
+
+        void OnDrawGizmosSelected()
+        {
+            Gizmos.color = Color.yellow;
+            Vector3 p = transform.position;
+            Gizmos.DrawLine(new Vector3(p.x - offsetX, p.y - 10, p.z), new Vector3(p.x - offsetX, p.y + 10, p.z));
+            Gizmos.DrawLine(new Vector3(p.x + offsetX, p.y - 10, p.z), new Vector3(p.x + offsetX, p.y + 10, p.z));
         }
 
         public bool HitsObstacle(Collider2D c)
