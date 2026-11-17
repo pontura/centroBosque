@@ -3933,20 +3933,20 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1248996836493929702, guid: dd122a4106b1b9346aac481746bfedec, type: 3}
-      propertyPath: EmissionModule.rateOverTime.scalar
-      value: 0
+      propertyPath: ClampVelocityModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1248996836493929702, guid: dd122a4106b1b9346aac481746bfedec, type: 3}
+      propertyPath: InitialModule.gravitySource
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3520820752017083891, guid: dd122a4106b1b9346aac481746bfedec, type: 3}
       propertyPath: m_Name
       value: Wind
       objectReference: {fileID: 0}
     - target: {fileID: 8130291116736551157, guid: dd122a4106b1b9346aac481746bfedec, type: 3}
-      propertyPath: moveWithTransform
+      propertyPath: InitialModule.gravitySource
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 8130291116736551157, guid: dd122a4106b1b9346aac481746bfedec, type: 3}
-      propertyPath: EmissionModule.rateOverTime.scalar
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
