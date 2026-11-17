@@ -22,6 +22,8 @@ namespace PlatformsGame
         Platforms platforms;
         Platform currentPlatform;
 
+        [SerializeField] int transp = 0;
+
         public void Init(Platforms platforms)
         {
             this.platforms = platforms;
@@ -31,6 +33,7 @@ namespace PlatformsGame
             groundY = floorY;
             bottomOffset = transform.position.y - rend.bounds.min.y;
             halfWidth = rend.bounds.extents.x;
+            transp = Random.Range(-2, 2);
         }
 
         void Update()
@@ -47,6 +50,7 @@ namespace PlatformsGame
                     currentPlatform = null;
                 }                
                 Anim("up");
+                AudioManager.Instance.sfxManager.PlayTransp("salto_conejo",transp);
             }
 
             if (grounded) return;
@@ -101,6 +105,7 @@ namespace PlatformsGame
             velocityY = 0;
             grounded = true;
             Anim("land");
+            AudioManager.Instance.sfxManager.PlayTransp("golpe", 5+transp);
         }
 
         // Llega a la ultima platform: festeja, espera y vuelve al inicio
@@ -108,6 +113,8 @@ namespace PlatformsGame
         {
             won = true;
             Anim("win");
+            AudioManager.Instance.sfxManager.PlayTransp("ring_ok", -5+transp, () => AudioManager.Instance.sfxManager.PlayTransp("done", transp));
+            //AudioManager.Instance.sfxManager.Play("ring_ok", 1f, () => AudioManager.Instance.sfxManager.Play("done"));
             Invoke("Restart", winDelay);
         }
 

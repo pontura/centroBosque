@@ -193,10 +193,19 @@ public class WindFX : MonoBehaviour
 
     public void Wind(Direction direction)
     {
+        bool change = currentDirection != direction;
         currentDirection = direction;
         SetWindAnimator(windLeft, ref windLeftState, direction == Direction.Left);
         SetWindAnimator(windRight, ref windRightState, direction == Direction.Right);
         targetBend = direction == Direction.Left ? -1f : direction == Direction.Right ? 1f : 0f;
+
+        if (!AudioManager.Instance.ambienceManager.IsPlaying() && (direction == Direction.Left || direction == Direction.Right)) {
+            Debug.Log("#ACA");
+            AudioManager.Instance.ambienceManager.Play("viento", 1f, () => AudioManager.Instance.ambienceManager.PlayLoop("loop"));
+        } else if (AudioManager.Instance.ambienceManager.IsPlaying() && change) {
+            Debug.Log("#ACA2");
+            AudioManager.Instance.ambienceManager.StopLoop();
+        }
     }
 
     // Play = arranca su única animación desde el frame 0.
@@ -213,6 +222,6 @@ public class WindFX : MonoBehaviour
 
         animator.speed = play ? 1f : 0f;
         animator.Play(stateHash, 0, 0f);
-        animator.Update(0f); // aplica el frame 0 en el acto
+        animator.Update(0f); // aplica el frame 0 en el acto        
     }
 }

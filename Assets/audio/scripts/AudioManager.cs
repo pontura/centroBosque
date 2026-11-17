@@ -11,8 +11,10 @@ public class AudioManager : MonoBehaviour
     public AudioMixerGroup uiSfx;    
 
     public SfxManager sfxManager;
+    public SfxManager sfxManager2;
     public UiSfxManager uiSfxManager;
     public MusicManager musicManager;
+    public MusicManager musicManager2;
     public MusicManager ambienceManager;
     public ModSfx modSfx;
 

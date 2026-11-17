@@ -118,5 +118,12 @@ public class MusicManager : MonoBehaviour {
         PlayTransp(name, pitch);        
     }
 
+    public void SetVol(float vol) {
+        asource.volume = vol;
+    }
+
+    public bool IsPlaying() {
+        return asource.isPlaying;
+    }
 }
 

@@ -33,6 +33,7 @@ namespace TreesGame
         Vector3 from;
         Vector3 to;
 
+        [SerializeField] int transp = 0;
         public void Init(Trees t)
         {
             trees = t;
@@ -49,6 +50,7 @@ namespace TreesGame
             treeID = startTreeID;
             startPos = transform.position;
             startPos.x = GetSideX(treeID, GetOtherTreeID());
+            transp = Random.Range(-2, 2);
             Restart();
         }
 
@@ -106,6 +108,7 @@ namespace TreesGame
             transform.position = goal.GetCharacterPosition();
             state = states.won;
             Anim("win");
+            AudioManager.Instance.sfxManager2.PlayTransp("ring", -3 + transp, () => AudioManager.Instance.sfxManager.PlayTransp("done", transp, 0.5f));
             Invoke("Exit", winDuration);
         }
 
@@ -165,10 +168,12 @@ namespace TreesGame
             jumpTime = 0;
             state = states.jumping;
             Anim("jump");
+            AudioManager.Instance.sfxManager2.PlayTransp("salto", transp, 0.5f);
         }
 
         void Fall()
         {
+            AudioManager.Instance.sfxManager2.PlayTransp("obstaculo", transp);
             Anim("fall");
             velocityY = 0;
             state = states.falling;

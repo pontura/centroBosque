@@ -64,6 +64,10 @@ public class DayCycle : MonoBehaviour
         normalizedTime += value * cyclesPerSecond * Time.deltaTime;
         normalizedTime = loop ? Mathf.Repeat(normalizedTime, 1f) : Mathf.Clamp01(normalizedTime);
 
+        float vol = 0.5f * (Mathf.Cos(2 * Mathf.PI * normalizedTime) + 1f);
+        AudioManager.Instance.musicManager.SetVol(vol);
+        AudioManager.Instance.musicManager2.SetVol(1f-vol);
+
         animator.Play(stateHash, layer, normalizedTime);
     }
 }

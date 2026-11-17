@@ -99,11 +99,11 @@ public class SfxManager : MonoBehaviour {
         count--;
     }
 
-    public void PlayTransp(string name,int pitch) {
-        PlayTransp(name, pitch,defaultVol);
+    public void PlayTransp(string name, int pitch, Action callback = null) {
+        PlayTransp(name, pitch, defaultVol, callback);
     }
 
-    public void PlayTransp(string name, int pitch, float vol) {
+    public void PlayTransp(string name, int pitch, float vol, Action callback = null) {
         asource.volume = vol;
         SfxClip sc = sfxClips.Find(x => x.name == name);
         if (sc != null) {
@@ -112,6 +112,9 @@ public class SfxManager : MonoBehaviour {
             else
                 asource.pitch = 1 / AudioManager.Instance.pitchSteps[Math.Abs(pitch)];
             asource.PlayOneShot(sc.clip);
+
+            if (callback != null)
+                StartCoroutine(OnEnd(sc.clip.length, callback));
         }
     }
 
