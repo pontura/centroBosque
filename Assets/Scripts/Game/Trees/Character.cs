@@ -15,7 +15,7 @@ namespace TreesGame
         [UnityEngine.Serialization.FormerlySerializedAs("slideSpeed")]
         public float climbSpeed = 0.5f; // velocidad a la que sube lentamente por el tree
         public float gravity = 20f;     // al caerse por un obstacle
-        public float restartDelay = 0.5f; // espera en el piso antes de empezar de nuevo
+        public float restartDelay = 0.5f; // espera en el piso despues de "land" antes de "exit"
         public float winDuration = 4f;    // tiempo de la animacion "win" antes de "exit"
         public float exitDuration = 1f;   // tiempo de "exit" antes de reaparecer con "entry"
 
@@ -184,9 +184,10 @@ namespace TreesGame
             {
                 pos.y = floorY;
                 state = states.dead;
-                
+
+                // land -> espera -> exit -> entry en la posicion inicial
                 Anim("land");
-                Invoke("Restart", restartDelay);
+                Invoke("Exit", restartDelay);
             }
             transform.position = pos;
         }
