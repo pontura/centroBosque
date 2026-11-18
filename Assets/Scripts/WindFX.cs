@@ -211,7 +211,7 @@ public class WindFX : MonoBehaviour
             AudioManager.Instance.ambienceManager.FadeVolume(0, 15, () => AudioManager.Instance.ambienceManager.StopLoop());            
         } else if (direction == Direction.Left) {
             if (AudioManager.Instance.ambienceManager.GetVol() != 1f) {
-                AudioManager.Instance.ambienceManager.FadeVolume(1, 15, () => AudioManager.Instance.ambienceManager.StopLoop());
+                AudioManager.Instance.ambienceManager.FadeVolume(1, 15);
             }
         }
 
@@ -225,7 +225,7 @@ public class WindFX : MonoBehaviour
             AudioManager.Instance.ambienceManager2.FadeVolume(0, 15, () => AudioManager.Instance.ambienceManager2.StopLoop());
         } else if (direction == Direction.Right) {
             if (AudioManager.Instance.ambienceManager2.GetVol() != 1f) {
-                AudioManager.Instance.ambienceManager2.FadeVolume(1, 15, () => AudioManager.Instance.ambienceManager2.StopLoop());
+                AudioManager.Instance.ambienceManager2.FadeVolume(1, 15);
             }
         }        
     }
