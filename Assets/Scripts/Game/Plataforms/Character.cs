@@ -105,7 +105,7 @@ namespace PlatformsGame
             velocityY = 0;
             grounded = true;
             Anim("land");
-            AudioManager.Instance.sfxManager.PlayTransp("golpe", 5+transp);
+            AudioManager.Instance.sfxManager.PlayTransp("golpe", 5+transp, 0.65f);
         }
 
         // Llega a la ultima platform: festeja, espera y vuelve al inicio
