@@ -105,7 +105,12 @@ public class WindFX : MonoBehaviour
         };
         spriteSkin = null;
     }
-
+    // Usado por TwoButtonsInput (provisorio) para reasignar las teclas en runtime
+    public void SetKeys(KeyCode left, KeyCode right)
+    {
+        leftKey = left;
+        rightKey = right;
+    }
     void Start()
     {
         MigrateLegacy();

@@ -8,7 +8,8 @@ namespace PlatformsGame
         public KeyCode keyCode;
         public float jumpSpeed = 8f;
         public float gravity = 20f;
-        public float winDelay = 6f;     // espera en la ultima platform antes de volver al inicio
+        public float winDuration = 5f;  // tiempo de la animacion "win" antes de "exit"
+        public float exitDuration = 1f; // tiempo de "exit" antes de reaparecer con "entry"
 
         Vector3 startPos;
         bool won;
@@ -108,17 +109,24 @@ namespace PlatformsGame
             AudioManager.Instance.sfxManager.PlayTransp("golpe", 5+transp, 0.65f);
         }
 
-        // Llega a la ultima platform: festeja, espera y vuelve al inicio
+        // Llega a la ultima platform: festeja (win), sale (exit) y vuelve a entrar (entry) en la posicion inicial
         void Win()
         {
             won = true;
             Anim("win");
             AudioManager.Instance.sfxManager.PlayTransp("ring_ok", -5+transp, () => AudioManager.Instance.sfxManager.PlayTransp("done", transp));
             //AudioManager.Instance.sfxManager.Play("ring_ok", 1f, () => AudioManager.Instance.sfxManager.Play("done"));
-            Invoke("Restart", winDelay);
+            Invoke("Exit", winDuration);
         }
 
-        void Restart()
+        void Exit()
+        {
+            Anim("exit");
+            Invoke("Entry", exitDuration);
+        }
+
+        // Reaparece en la posicion inicial; recien aca vuelve a aceptar el salto
+        void Entry()
         {
             if (currentPlatform != null)
             {
@@ -130,7 +138,7 @@ namespace PlatformsGame
             velocityY = 0;
             grounded = true;
             won = false;
-            Anim("land");
+            Anim("entry");
         }
 
         string lastName;

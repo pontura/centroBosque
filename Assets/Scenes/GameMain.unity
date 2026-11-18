@@ -875,7 +875,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: este se juega con Z y X
+  m_text: este se juega con A y S
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1378,6 +1378,7 @@ GameObject:
   - component: {fileID: 599604143}
   - component: {fileID: 599604145}
   - component: {fileID: 599604144}
+  - component: {fileID: 599604146}
   m_Layer: 0
   m_Name: GameContent
   m_TagString: Untagged
@@ -1531,6 +1532,26 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &599604146
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 599604140}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 650bf9c8ab3ff6b4bbe491ad235ff493, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TwoButtonsInput
+  platforms: {fileID: 943061481}
+  trees: {fileID: 1717121521}
+  wind: {fileID: 599604143}
+  button1: 122
+  button2: 120
+  startMode: 1
+  messageDuration: 2
+  fontSize: 60
 --- !u!114 &604014030 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 7393601667011745205, guid: 227cad7ef125c474bacd7e57f40b4b9d, type: 3}
@@ -2270,7 +2291,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5872610799102522911, guid: 6cb908f5542565b46a5fba8a1b4d654f, type: 3}
       propertyPath: keyCode
-      value: 120
+      value: 115
       objectReference: {fileID: 0}
     - target: {fileID: 5872610799102522911, guid: 6cb908f5542565b46a5fba8a1b4d654f, type: 3}
       propertyPath: jumpSpeed
@@ -3584,6 +3605,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 57c008f954fe54a8bb972de1018a2cb8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.2D.Animation.Runtime::UnityEngine.U2D.Animation.SpriteSkin
+--- !u!114 &1717121521 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2778538313714781982, guid: 6a93d9898f5266645bc2dbc59cbd2d43, type: 3}
+  m_PrefabInstance: {fileID: 801941057}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c243141dd9ba5c49b6e80b32daba530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::TreesGame.Trees
 --- !u!1 &1719669722
 GameObject:
   m_ObjectHideFlags: 0
@@ -4209,6 +4241,10 @@ PrefabInstance:
     - target: {fileID: 5872610799102522911, guid: 6cb908f5542565b46a5fba8a1b4d654f, type: 3}
       propertyPath: gravity
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5872610799102522911, guid: 6cb908f5542565b46a5fba8a1b4d654f, type: 3}
+      propertyPath: keyCode
+      value: 97
       objectReference: {fileID: 0}
     - target: {fileID: 5872610799102522911, guid: 6cb908f5542565b46a5fba8a1b4d654f, type: 3}
       propertyPath: jumpSpeed
