@@ -17,6 +17,7 @@ public class AudioManager : MonoBehaviour
     public MusicManager musicManager;
     public MusicManager musicManager2;
     public MusicManager ambienceManager;
+    public MusicManager ambienceManager2;
     public ModSfx modSfx;
 
     public float[] pitchSteps;

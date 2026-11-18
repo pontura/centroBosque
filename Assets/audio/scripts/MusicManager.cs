@@ -121,9 +121,42 @@ public class MusicManager : MonoBehaviour {
     public void SetVol(float vol) {
         asource.volume = vol;
     }
+    public float GetVol() {
+        return asource.volume;
+    }
 
     public bool IsPlaying() {
         return asource.isPlaying;
+    }
+
+    public void FadeVolumeFromTo(float from, float to, float speed, System.Action callback=null) {
+        StopAllCoroutines();
+        StartCoroutine(FadeVolToCoroutine(from, to, speed, callback));
+    }
+    public void FadeVolume(float to, float speed, System.Action callback=null) {
+        StopAllCoroutines();
+        StartCoroutine(FadeVolToCoroutine(asource.volume, to, speed, callback));
+    }
+    IEnumerator FadeVolToCoroutine(float from, float to, float speed, System.Action callback) {
+        asource.volume = from;
+        float vol = asource.volume;
+        float speedFactor = 1f / speed;
+        float step = Mathf.Abs(to - from);
+        if (to > vol) {
+            while (to >= vol) {
+                yield return new WaitForEndOfFrame();
+                vol += Time.deltaTime * speedFactor * step;
+                asource.volume = vol;
+            }
+        } else {
+            while (to <= vol) {
+                yield return new WaitForEndOfFrame();
+                vol -= Time.deltaTime * speedFactor * step;
+                asource.volume = vol;
+            }
+        }
+        if (callback != null)
+            callback();
     }
 }
 

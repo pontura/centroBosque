@@ -199,13 +199,35 @@ public class WindFX : MonoBehaviour
         SetWindAnimator(windRight, ref windRightState, direction == Direction.Right);
         targetBend = direction == Direction.Left ? -1f : direction == Direction.Right ? 1f : 0f;
 
-        if (!AudioManager.Instance.ambienceManager.IsPlaying() && (direction == Direction.Left || direction == Direction.Right)) {
-            Debug.Log("#ACA");
-            AudioManager.Instance.ambienceManager.Play("viento", 1f, () => AudioManager.Instance.ambienceManager.PlayLoop("loop"));
-        } else if (AudioManager.Instance.ambienceManager.IsPlaying() && change) {
-            Debug.Log("#ACA2");
-            AudioManager.Instance.ambienceManager.StopLoop();
+        Debug.Log("# " + direction.ToString());
+
+        if (!AudioManager.Instance.ambienceManager.IsPlaying()) {
+            if (direction == Direction.Left) {
+                AudioManager.Instance.ambienceManager.PlayLoop("loop", 0f);
+                AudioManager.Instance.ambienceManager.FadeVolumeFromTo(0, 1, 15);
+            }
+        } else if (direction == Direction.None || direction == Direction.Right) {
+            //Debug.Log("#ACA2");
+            AudioManager.Instance.ambienceManager.FadeVolume(0, 15, () => AudioManager.Instance.ambienceManager.StopLoop());            
+        } else if (direction == Direction.Left) {
+            if (AudioManager.Instance.ambienceManager.GetVol() != 1f) {
+                AudioManager.Instance.ambienceManager.FadeVolume(1, 15, () => AudioManager.Instance.ambienceManager.StopLoop());
+            }
         }
+
+        if (!AudioManager.Instance.ambienceManager2.IsPlaying()) {
+            if (direction == Direction.Right) {
+                AudioManager.Instance.ambienceManager2.PlayLoop("loop", 0f);
+                AudioManager.Instance.ambienceManager2.FadeVolumeFromTo(0, 1, 15);
+            }
+        } else if (direction == Direction.None || direction == Direction.Left) {
+            //Debug.Log("#ACA2");
+            AudioManager.Instance.ambienceManager2.FadeVolume(0, 15, () => AudioManager.Instance.ambienceManager2.StopLoop());
+        } else if (direction == Direction.Right) {
+            if (AudioManager.Instance.ambienceManager2.GetVol() != 1f) {
+                AudioManager.Instance.ambienceManager2.FadeVolume(1, 15, () => AudioManager.Instance.ambienceManager2.StopLoop());
+            }
+        }        
     }
 
     // Play = arranca su única animación desde el frame 0.
