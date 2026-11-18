@@ -12,6 +12,7 @@ public class AudioManager : MonoBehaviour
 
     public SfxManager sfxManager;
     public SfxManager sfxManager2;
+    public SfxManager sfxManager0;
     public UiSfxManager uiSfxManager;
     public MusicManager musicManager;
     public MusicManager musicManager2;

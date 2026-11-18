@@ -32,11 +32,12 @@ public class SfxManager : MonoBehaviour {
 
     }
 
-    public void PlayLoop(string name, float vol) {
+    public void PlayLoop(string name, float vol, bool resetPitch=true) {
         SfxClip sc = sfxClips.Find(x => x.name == name);
         if (sc != null) {
             asource.volume = vol;
-            asource.pitch = 1f;
+            if(resetPitch) 
+                asource.pitch = 1f;
             asource.loop = true;
             asource.clip = sc.clip;
             asource.Play();
@@ -107,10 +108,7 @@ public class SfxManager : MonoBehaviour {
         asource.volume = vol;
         SfxClip sc = sfxClips.Find(x => x.name == name);
         if (sc != null) {
-            if (pitch >= 0)
-                asource.pitch = 1 * AudioManager.Instance.pitchSteps[Math.Abs(pitch)];
-            else
-                asource.pitch = 1 / AudioManager.Instance.pitchSteps[Math.Abs(pitch)];
+            SetTransp(pitch);
             asource.PlayOneShot(sc.clip);
 
             if (callback != null)
@@ -120,6 +118,13 @@ public class SfxManager : MonoBehaviour {
 
     public void SetPitch(float p) {
         asource.pitch = p;
+    }
+
+    public void SetTransp(int pitch) {
+        if (pitch >= 0)
+            asource.pitch = 1 * AudioManager.Instance.pitchSteps[Math.Abs(pitch)];
+        else
+            asource.pitch = 1 / AudioManager.Instance.pitchSteps[Math.Abs(pitch)];
     }
 
     public void CancelAllOnClipDone() {

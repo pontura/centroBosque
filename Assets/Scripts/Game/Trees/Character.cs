@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 namespace TreesGame
 {
@@ -33,13 +34,14 @@ namespace TreesGame
         Vector3 from;
         Vector3 to;
 
-        [SerializeField] int transp = 0;
-        public void Init(Trees t)
-        {
+        SfxManager sfxManager;
+        int transp = 0;
+        bool isClimbing;
+        public void Init(Trees t) {
             trees = t;
             if (goal == null)
                 Debug.LogWarning("Character sin Goal asignado: " + name);
-            col =GetComponentInChildren<Collider2D>();
+            col = GetComponentInChildren<Collider2D>();
             if (col == null)
                 Debug.LogWarning("Character sin Collider2D: no va a detectar obstacles");
             Renderer rend = GetComponentInChildren<Renderer>();
@@ -49,8 +51,14 @@ namespace TreesGame
             // Se ubica al lado del tree inicial, del lado que mira al otro tree
             treeID = startTreeID;
             startPos = transform.position;
-            startPos.x = GetSideX(treeID, GetOtherTreeID());
-            transp = Random.Range(-2, 2);
+            startPos.x = GetSideX(treeID, GetOtherTreeID());            
+            if (keyCode == KeyCode.M) {
+                transp = -1;
+                sfxManager = AudioManager.Instance.sfxManager2;
+            } else if (keyCode == KeyCode.N) {
+                transp = 1;
+                sfxManager = AudioManager.Instance.sfxManager0;
+            }
             Restart();
         }
 
@@ -108,7 +116,7 @@ namespace TreesGame
             transform.position = goal.GetCharacterPosition();
             state = states.won;
             Anim("win");
-            AudioManager.Instance.sfxManager2.PlayTransp("ring", -3 + transp, () => AudioManager.Instance.sfxManager.PlayTransp("done", transp, 0.5f));
+            sfxManager?.PlayTransp("ring", -3 + transp, () => sfxManager?.PlayTransp("done", transp, 0.5f));
             Invoke("Exit", winDuration);
         }
 
@@ -154,10 +162,17 @@ namespace TreesGame
             Vector3 pos = transform.position;
             pos.y += climbSpeed * Time.deltaTime;
             transform.position = pos;
+            if (!isClimbing) {
+                isClimbing = true;
+                sfxManager?.StopLoop();
+                sfxManager?.SetPitch(transp);
+                sfxManager?.PlayLoop("sube", 0.5f, false);
+            }
         }
 
         void Jump()
         {
+            isClimbing = false;
             int targetID = GetOtherTreeID();
             from = transform.position;
             to = from;
@@ -168,12 +183,15 @@ namespace TreesGame
             jumpTime = 0;
             state = states.jumping;
             Anim("jump");
-            AudioManager.Instance.sfxManager2.PlayTransp("salto", transp, 0.5f);
+            sfxManager?.StopLoop();
+            sfxManager?.PlayTransp("salto", transp, 0.5f);
         }
 
         void Fall()
         {
-            AudioManager.Instance.sfxManager2.PlayTransp("obstaculo", transp);
+            isClimbing = false;            
+            sfxManager?.StopLoop();
+            sfxManager?.PlayTransp("obstaculo", transp);
             Anim("fall");
             velocityY = 0;
             state = states.falling;

@@ -1,5 +1,161 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1209335979517891688
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9179273403743589210}
+  - component: {fileID: 985541776151854287}
+  - component: {fileID: 8319307359226550720}
+  m_Layer: 0
+  m_Name: Sfx0
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9179273403743589210
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209335979517891688}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7804316501957329265}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &985541776151854287
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209335979517891688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 60ab4ea36a053be4cb7440572839a9b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultVol: 1
+  sfxClips:
+  - clip: {fileID: 8300000, guid: 309348a35b59fa0429c96797987ef847, type: 3}
+    name: sube
+  - clip: {fileID: 8300000, guid: 2310331e26ccfaa43a59cb547023df55, type: 3}
+    name: salto
+  - clip: {fileID: 8300000, guid: 7b748ebacea1c6b44b8ad263b7486a39, type: 3}
+    name: obstaculo
+  - clip: {fileID: 8300000, guid: 7b748ebacea1c6b44b8ad263b7486a39, type: 3}
+    name: obstaculo
+  - clip: {fileID: 8300000, guid: 44a6cdb991f8bc74aa34cce17d05db55, type: 3}
+    name: ring
+  - clip: {fileID: 8300000, guid: 426fcdfb1ea833d4c864c4062e822b4d, type: 3}
+    name: done
+--- !u!82 &8319307359226550720
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1209335979517891688}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 4573361069440721447, guid: 10cf3e2466da54140a69a6383b7f9199, type: 2}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0.75
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1348531077120966691
 GameObject:
   m_ObjectHideFlags: 0
@@ -191,10 +347,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultVol: 1
   musicClips:
-  - clip: {fileID: 8300000, guid: 30f7a5d3c7b8e2c4e8a59dda70f06a02, type: 3}
-    name: viento
-  - clip: {fileID: 8300000, guid: 1c214581d01c46c4e8ca25ee0a9285aa, type: 3}
+  - clip: {fileID: 8300000, guid: 98cbeb0c39e5987429d69ca8b8c0c682, type: 3}
+    name: viento_in
+  - clip: {fileID: 8300000, guid: c88a40c30988c1248a0fdf043f09d7ff, type: 3}
     name: loop
+  - clip: {fileID: 8300000, guid: 0ae550cc0b1d8b642a14d84d4a23028b, type: 3}
+    name: viento_out
 --- !u!82 &3694016860287824885
 AudioSource:
   m_ObjectHideFlags: 0
@@ -491,6 +649,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultVol: 1
   sfxClips:
+  - clip: {fileID: 8300000, guid: 309348a35b59fa0429c96797987ef847, type: 3}
+    name: sube
   - clip: {fileID: 8300000, guid: 2310331e26ccfaa43a59cb547023df55, type: 3}
     name: salto
   - clip: {fileID: 8300000, guid: 7b748ebacea1c6b44b8ad263b7486a39, type: 3}
@@ -630,6 +790,7 @@ Transform:
   m_Children:
   - {fileID: 4271572238711724801}
   - {fileID: 8778614134938967501}
+  - {fileID: 9179273403743589210}
   - {fileID: 2783605415953286796}
   - {fileID: 8268536810596780668}
   - {fileID: 7148501413513426316}
@@ -654,6 +815,7 @@ MonoBehaviour:
   uiSfx: {fileID: 8955860382321252259, guid: 10cf3e2466da54140a69a6383b7f9199, type: 2}
   sfxManager: {fileID: 7006423973281379095}
   sfxManager2: {fileID: 234324544879625123}
+  sfxManager0: {fileID: 985541776151854287}
   uiSfxManager: {fileID: 7214996841846605607}
   musicManager: {fileID: 6131889095351074877}
   musicManager2: {fileID: 492711283188385585}
